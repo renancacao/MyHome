@@ -1,0 +1,10 @@
+
+Gsquid:S1068"+Remove this unused "tileset" private field.(«ÉØš8ÂíÀÂ-
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¿°Á„8ÂíÀÂ-
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ßûÀüÿÿÿÿ8ÂíÀÂ-
+Dsquid:S1185"(Remove this method to simply inherit it.(Ÿ½Ÿ»8ÂíÀÂ-
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(£“‡Òıÿÿÿÿ8ÂíÀÂ-
+Zsquid:UnusedPrivateMethod"1Remove this unused private "getTileBlock" method.(úı€f8ÂíÀÂ-
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÂíÀÂ-
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(‹é¤Ë8ÂíÀÂ-
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8’çÕÂ-
