@@ -10,6 +10,16 @@ public class SpriteImpl implements Sprite {
     private final int height;
     private final int x;
     private final int y;
+    private       int horizontalBlocks = 1;
+    private       int verticalBlocks   = 1;
+
+
+    protected SpriteImpl(int resourceId, int width, int height, int x, int y, int horizontalBlocks,
+                         int verticalBlocks) throws SpriteBadParameterException {
+        this(resourceId, width, height, x, y);
+        this.horizontalBlocks = horizontalBlocks;
+        this.verticalBlocks = verticalBlocks;
+    }
 
     protected SpriteImpl(int resourceId, int width, int height, int x, int y)
             throws SpriteBadParameterException {
@@ -52,5 +62,15 @@ public class SpriteImpl implements Sprite {
         int bottom = (int) ((y + height) * density);
 
         return new Rect(left, top, right, bottom);
+    }
+
+    @Override
+    public int getHorizontalBlocks() {
+        return horizontalBlocks;
+    }
+
+    @Override
+    public int getVerticalBlocks() {
+        return verticalBlocks;
     }
 }

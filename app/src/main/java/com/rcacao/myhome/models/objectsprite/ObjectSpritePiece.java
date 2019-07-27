@@ -9,4 +9,9 @@ public interface ObjectSpritePiece {
     int getResourceId();
 
     Rect getSpriteSrcRect(float density);
+
+    int getSpriteHorizontalBlocks();
+
+    int getSpriteVerticalBlocks();
+
 }

@@ -2,7 +2,7 @@ package com.rcacao.myhome.drawers;
 
 import android.graphics.Canvas;
 
-public interface TileMapDrawer {
+public interface Drawer {
     void draw(Canvas canvas);
 
     void setBlockSize(int blockSize);

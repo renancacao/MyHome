@@ -8,11 +8,18 @@ import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.rcacao.myhome.drawers.Drawer;
+import com.rcacao.myhome.drawers.ObjectSpriteDrawerImpl;
+import com.rcacao.myhome.drawers.TileMapDrawerImpl;
+import com.rcacao.myhome.models.furnitures.Piano;
+import com.rcacao.myhome.models.furnitures.Windows;
+import com.rcacao.myhome.models.objectsprite.ObjectSprite;
+import com.rcacao.myhome.models.objectsprite.ObjectSpriteImpl;
+import com.rcacao.myhome.models.objectsprite.ObjectSpritePiece;
+import com.rcacao.myhome.models.objectsprite.ObjectSpritePieceImpl;
 import com.rcacao.myhome.models.sprites.SpriteBadParameterException;
 import com.rcacao.myhome.models.tilemap.TileMap;
 import com.rcacao.myhome.models.tilemap.TileMapImpl;
-import com.rcacao.myhome.drawers.TileMapDrawer;
-import com.rcacao.myhome.drawers.TileMapDrawerImpl;
 import com.rcacao.myhome.models.tiles.CommonFloor;
 import com.rcacao.myhome.models.tiles.CommonWall;
 import com.rcacao.myhome.utils.PointUtils;
@@ -21,9 +28,10 @@ import java.util.ArrayList;
 
 public class CanvasView extends View {
 
-    public static final int           HORIZONTAL_BLOCKS = 10;
-    public static final int           VERTICAL_BLOCKS   = 15;
-    private             TileMapDrawer tileMapDrawer;
+    public static final int    HORIZONTAL_BLOCKS = 10;
+    public static final int    VERTICAL_BLOCKS   = 15;
+    private             Drawer tileMapDrawer;
+    private             Drawer furnitureDrawer;
 
     public CanvasView(Context context) {
         super(context);
@@ -52,6 +60,13 @@ public class CanvasView extends View {
 
         tileMapDrawer = new TileMapDrawerImpl(tileMaps);
 
+        ObjectSprite piano = new ObjectSpriteImpl(
+                new ObjectSpritePiece[]{new ObjectSpritePieceImpl(new Point(6, 5), getPiano())});
+        ObjectSprite windows = new ObjectSpriteImpl(
+                new ObjectSpritePiece[]{new ObjectSpritePieceImpl(new Point(3, 2), getWindows())});
+
+        furnitureDrawer = new ObjectSpriteDrawerImpl(new ObjectSprite[]{piano, windows});
+
     }
 
     @Nullable
@@ -78,6 +93,30 @@ public class CanvasView extends View {
         return commonWall;
     }
 
+    @Nullable
+    private Piano getPiano() {
+        Piano piano;
+        try {
+            piano = new Piano();
+        } catch (SpriteBadParameterException e) {
+            return null;
+        }
+
+        return piano;
+    }
+
+    @Nullable
+    private Windows getWindows() {
+        Windows windows;
+        try {
+            windows = new Windows();
+        } catch (SpriteBadParameterException e) {
+            return null;
+        }
+
+        return windows;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -86,6 +125,7 @@ public class CanvasView extends View {
         canvas.drawColor(Color.BLACK);
 
         tileMapDrawer.draw(canvas);
+        furnitureDrawer.draw(canvas);
     }
 
     @Override
@@ -98,17 +138,16 @@ public class CanvasView extends View {
         int horizontalPadding = getHorizontalPadding(width, blockSize);
         int verticalPadding = getVerticalPadding(height, blockSize);
 
-        tileMapDrawer.setBlockSize(blockSize);
-        tileMapDrawer.setHorizontalPadding(horizontalPadding);
-        tileMapDrawer.setVerticalPadding(verticalPadding);
+        setDrawerParameters(blockSize, horizontalPadding, verticalPadding, tileMapDrawer);
+        setDrawerParameters(blockSize, horizontalPadding, verticalPadding, furnitureDrawer);
 
     }
 
     private int getBlockSize(int measuredWidth, int measuredHeight) {
         int blockByWidth = measuredWidth / HORIZONTAL_BLOCKS;
         int blockByHeight = measuredHeight / VERTICAL_BLOCKS;
-        return Math.min(blockByHeight, blockByWidth);
-
+        int minBlock = Math.min(blockByHeight, blockByWidth);
+        return (int) (Math.floor((double) minBlock / 16) * 16);
     }
 
     private int getHorizontalPadding(int measuredSize, int blockSize) {
@@ -117,6 +156,13 @@ public class CanvasView extends View {
 
     private int getVerticalPadding(int measuredSize, int blockSize) {
         return getPadding(measuredSize, blockSize, VERTICAL_BLOCKS);
+    }
+
+    private void setDrawerParameters(int blockSize, int horizontalPadding, int verticalPadding,
+                                     Drawer furnitureDrawer) {
+        furnitureDrawer.setBlockSize(blockSize);
+        furnitureDrawer.setHorizontalPadding(horizontalPadding);
+        furnitureDrawer.setVerticalPadding(verticalPadding);
     }
 
     private int getPadding(int measuredSize, int blockSize, int horizontalBlocks) {

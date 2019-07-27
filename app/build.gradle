@@ -23,7 +23,8 @@ android {
         main {
             res.srcDirs = [
                     'src/main/res',
-                    'src/main/tilesets',
+                    'src/main/res_tilesets',
+                    'src/main/res_furnitures'
             ]
         }
     }

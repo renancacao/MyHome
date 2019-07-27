@@ -10,5 +10,9 @@ public interface DrawUtils {
     float getDensity();
 
     Rect getRectangle(int blockSize, int horizontalPadding, int verticalPadding, int x, int y,
-                      float density);
+                      float defaultDensity);
+
+    Rect getRectangle(int blockSize, int horizontalBlocks, int verticalBlocks,
+                      int horizontalPadding, int verticalPadding, int x, int y,
+                      float defaultDensity);
 }

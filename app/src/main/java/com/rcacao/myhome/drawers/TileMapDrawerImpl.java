@@ -11,7 +11,7 @@ import com.rcacao.myhome.utils.DrawUtils;
 
 import javax.inject.Inject;
 
-public class TileMapDrawerImpl implements TileMapDrawer {
+public class TileMapDrawerImpl implements Drawer {
 
     private static final int DEFAULT_DENSITY = 1;
     @Inject

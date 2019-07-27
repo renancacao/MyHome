@@ -7,4 +7,7 @@ public interface Sprite {
     int getResourceId();
     Rect getSrcRect(float density);
 
+    int getHorizontalBlocks();
+
+    int getVerticalBlocks();
 }

@@ -25,17 +25,28 @@ public class DrawUtilsImpl implements DrawUtils {
 
     @Override
     public Rect getRectangle(int blockSize, int horizontalPadding, int verticalPadding, int x,
-                             int y, float density) {
+                             int y, float defaultDensity) {
+
+        return getRectangle(blockSize, 1, 1, horizontalPadding, verticalPadding, x, y,
+                            defaultDensity);
+
+    }
+
+
+    @Override
+    public Rect getRectangle(int blockSize, int horizontalBlocks, int verticalBlocks,
+                             int horizontalPadding, int verticalPadding, int x, int y,
+                             float defaultDensity) {
 
         int left = horizontalPadding + (x * blockSize);
         int top = verticalPadding + (y * blockSize);
-        int right = (int) ((left + blockSize) * density);
-        int bottom = (int) ((top + blockSize) * density);
+        int right = (int) ((left + (blockSize * horizontalBlocks)) * defaultDensity);
+        int bottom = (int) ((top + (blockSize * verticalBlocks)) * defaultDensity);
 
-        left *= density;
-        top *= density;
+        left *= defaultDensity;
+        top *= defaultDensity;
 
         return new Rect(left, top, right, bottom);
-
     }
+
 }

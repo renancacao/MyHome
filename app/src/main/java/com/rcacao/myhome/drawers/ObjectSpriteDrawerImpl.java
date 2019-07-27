@@ -12,7 +12,7 @@ import com.rcacao.myhome.utils.DrawUtils;
 
 import javax.inject.Inject;
 
-public class ObjectSpriteDrawerImpl implements TileMapDrawer {
+public class ObjectSpriteDrawerImpl implements Drawer {
 
     private static final int DEFAULT_DENSITY = 1;
     @Inject
@@ -60,8 +60,10 @@ public class ObjectSpriteDrawerImpl implements TileMapDrawer {
             Rect srcRect = piece.getSpriteSrcRect(drawUtils.getDensity());
             Point p = piece.getPoint();
             canvas.drawBitmap(bitmap, srcRect,
-                              drawUtils.getRectangle(blockSize, horizontalPadding, verticalPadding,
-                                                     p.x, p.y, DEFAULT_DENSITY), null);
+                              drawUtils.getRectangle(blockSize, piece.getSpriteHorizontalBlocks(),
+                                                     piece.getSpriteVerticalBlocks(),
+                                                     horizontalPadding, verticalPadding, p.x, p.y,
+                                                     DEFAULT_DENSITY), null);
 
         }
 
