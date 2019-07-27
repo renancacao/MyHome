@@ -1,4 +1,4 @@
-package com.rcacao.myhome.domain.sprites;
+package com.rcacao.myhome.models.sprites;
 
 import android.graphics.Rect;
 

@@ -1,8 +1,8 @@
-package com.rcacao.myhome.domain.tiles;
+package com.rcacao.myhome.models.tiles;
 
 import com.rcacao.myhome.R;
-import com.rcacao.myhome.domain.sprites.SpriteBadParameterException;
-import com.rcacao.myhome.domain.sprites.SpriteImpl;
+import com.rcacao.myhome.models.sprites.SpriteBadParameterException;
+import com.rcacao.myhome.models.sprites.SpriteImpl;
 
 public class CommonWall extends SpriteImpl {
 

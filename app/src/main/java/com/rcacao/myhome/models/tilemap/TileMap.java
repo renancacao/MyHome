@@ -1,11 +1,11 @@
-package com.rcacao.myhome.domain.sprites;
+package com.rcacao.myhome.models.tilemap;
 
 import android.graphics.Point;
 import android.graphics.Rect;
 
 import java.util.List;
 
-public interface SpriteMap {
+public interface TileMap {
     int getSpriteResourceId();
 
     List<Point> getPoints();

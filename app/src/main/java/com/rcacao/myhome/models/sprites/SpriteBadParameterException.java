@@ -1,8 +1,8 @@
-package com.rcacao.myhome.domain.sprites;
+package com.rcacao.myhome.models.sprites;
 
 public class SpriteBadParameterException extends Exception {
 
-    public SpriteBadParameterException(String info) {
+    SpriteBadParameterException(String info) {
         super(String.format("Sprite bad parameter received: %s", info));
     }
 }

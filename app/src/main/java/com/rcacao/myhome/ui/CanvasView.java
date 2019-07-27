@@ -8,23 +8,22 @@ import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.rcacao.myhome.domain.sprites.SpriteBadParameterException;
-import com.rcacao.myhome.domain.sprites.SpriteMap;
-import com.rcacao.myhome.domain.sprites.SpriteMapDrawer;
-import com.rcacao.myhome.domain.sprites.SpriteMapDrawerImpl;
-import com.rcacao.myhome.domain.sprites.SpriteMapImpl;
-import com.rcacao.myhome.domain.tiles.CommonFloor;
-import com.rcacao.myhome.domain.tiles.CommonWall;
+import com.rcacao.myhome.models.sprites.SpriteBadParameterException;
+import com.rcacao.myhome.models.tilemap.TileMap;
+import com.rcacao.myhome.models.tilemap.TileMapImpl;
+import com.rcacao.myhome.drawers.TileMapDrawer;
+import com.rcacao.myhome.drawers.TileMapDrawerImpl;
+import com.rcacao.myhome.models.tiles.CommonFloor;
+import com.rcacao.myhome.models.tiles.CommonWall;
 import com.rcacao.myhome.utils.PointUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CanvasView extends View {
 
-    public static final int             HORIZONTAL_BLOCKS = 10;
-    public static final int             VERTICAL_BLOCKS   = 15;
-    private             SpriteMapDrawer spriteMapDrawer;
+    public static final int           HORIZONTAL_BLOCKS = 10;
+    public static final int           VERTICAL_BLOCKS   = 15;
+    private             TileMapDrawer tileMapDrawer;
 
     public CanvasView(Context context) {
         super(context);
@@ -48,11 +47,10 @@ public class CanvasView extends View {
         pointsWall.addAll(PointUtils.getPointsFromRect(new Rect(5, 5, 5, 6)));
         pointsWall.addAll(PointUtils.getPointsFromRect(new Rect(6, 3, 7, 4)));
 
-        List<SpriteMap> spriteMapList = new ArrayList<>();
-        spriteMapList.add(new SpriteMapImpl(commonFloor, pointsFloor));
-        spriteMapList.add(new SpriteMapImpl(commonWall, pointsWall));
+        TileMap[] tileMaps = {new TileMapImpl(commonFloor, pointsFloor), new TileMapImpl(commonWall,
+                                                                                         pointsWall)};
 
-        spriteMapDrawer = new SpriteMapDrawerImpl(spriteMapList);
+        tileMapDrawer = new TileMapDrawerImpl(tileMaps);
 
     }
 
@@ -87,7 +85,7 @@ public class CanvasView extends View {
         //background
         canvas.drawColor(Color.BLACK);
 
-        spriteMapDrawer.draw(canvas);
+        tileMapDrawer.draw(canvas);
     }
 
     @Override
@@ -100,9 +98,9 @@ public class CanvasView extends View {
         int horizontalPadding = getHorizontalPadding(width, blockSize);
         int verticalPadding = getVerticalPadding(height, blockSize);
 
-        spriteMapDrawer.setBlockSize(blockSize);
-        spriteMapDrawer.setHorizontalPadding(horizontalPadding);
-        spriteMapDrawer.setVerticalPadding(verticalPadding);
+        tileMapDrawer.setBlockSize(blockSize);
+        tileMapDrawer.setHorizontalPadding(horizontalPadding);
+        tileMapDrawer.setVerticalPadding(verticalPadding);
 
     }
 
